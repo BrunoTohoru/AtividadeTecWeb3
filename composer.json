@@ -1,0 +1,19 @@
+{
+    "name": "bruno/atividade-tec-web3",
+    "description": "Atividade do 3o bimestre da materia de TecWeb3",
+    "autoload": {
+        "psr-4": {
+            "entities\\": "src/entities"
+        }
+    },
+    "authors": [
+        {
+            "name": "Bruno Shiotani",
+            "email": "bruno_shiotani@outlook.com"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^7.9",
+        "doctrine/orm": "^3.3"
+    }
+}
