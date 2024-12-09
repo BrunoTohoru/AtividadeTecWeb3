@@ -13,7 +13,7 @@ $dbParams = [
     'driver' => 'pdo_mysql',
     'user' => 'root',
     'password' => '',
-    'host' => 'localhost',
+    'host' => 'localhost:3306',
     'dbname' => 'ifpr',
 ];
 // Obtém a conexão com o banco de dados

@@ -1,8 +1,12 @@
 <?php
 namespace Entities;
-use Doctrine\ORM\Mapping\Column; //... Demais imports
+use Doctrine\ORM\Mapping\Column; 
+use Doctrine\ORM\Mapping\Entity;
+use Doctrine\ORM\Mapping\GeneratedValue;
+use Doctrine\ORM\Mapping\Id;
+use Doctrine\ORM\Mapping\Table;//... Demais imports
 
-#[Entity]
+#[Entity()]
 #[Table(name: 'livro')]
 class Livro
 {
