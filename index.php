@@ -4,7 +4,8 @@ session_start();
 
 require_once __DIR__ . '/cli-config.php';
 use Entities\Livro;
-
+$livro = null;
+$_SESSION["mensagem"] = null;
 if(isset($_POST['cadastrar'])) {
     $livro = new Livro();
     $livro->titulo = $_POST['titulo'];
@@ -20,6 +21,17 @@ if(isset($_POST['cadastrar'])) {
 if(isset($_GET["editar"])) {
     $livro = $entityManager->find("Entities\Livro", $_GET["id"]);
 }
+
+if(isset($_POST['editar'])) {
+    $livro->titulo = $_POST['titulo'];
+    $livro->autor = $_POST['autor'];
+    $livro->preco = $_POST['preco'];
+
+    $entityManager->flush();
+
+    $_SESSION["mensagem"] = "<div class='alert alert-warning' role='alert'> Registro atualizado com sucesso! </div>";
+}
+
 $livroRepository = $entityManager->getRepository("Entities\Livro");
 $livros = $livroRepository->findAll();
 
@@ -53,17 +65,19 @@ if(isset($_GET["deletar"])) {
         <form method="POST">
             <div class="mb-3">
                 <label for="tituto" class="form-label">Título</label>
-                <input type="text" name="titulo" class="form-control" id="titulo" aria-describedby="Título do filme">
+                <input type="text" name="titulo" class="form-control" id="titulo" aria-describedby="Título do filme" value="<?=(is_null($livro)) ? ("") : ($livro->titulo)?>">
             </div>
             <div class="mb-3">
                 <label for="autor" class="form-label">Autor</label>
-                <input type="text" name="autor" class="form-control" id="autor" aria-describedby="Autor do filme">
+                <input type="text" name="autor" class="form-control" id="autor" aria-describedby="Autor do filme" value="<?=(is_null($livro)) ? ("") : ($livro->autor)?>">
             </div>
             <div class="mb-3">
                 <label for="preco" class="form-label">Preço (R$)</label>
-                <input type="number" name="preco" step="0.01" class="form-control" id="preco" aria-describedby="Preço do filme">
+                <input type="number" name="preco" step="0.01" class="form-control" id="preco" aria-describedby="Preço do filme" value="<?=(is_null($livro)) ? ("") : ($livro->preco)?>">
             </div>
-            <button type="submit" name="cadastrar" class="btn btn-primary">Cadastrar</button>
+            <button type="submit" name="<?=(is_null($livro)) ? ("cadastrar") : ("editar") ?>" class="btn btn-primary">
+                <?=(is_null($livro)) ? ("Cadastrar") : ("Editar") ?>
+            </button>
         </form>
     </div>
     <div class="container">
